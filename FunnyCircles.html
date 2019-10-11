@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phát triển ứng dụng đơn giản với hình tròn và các hiệu ứng khác nhau</title>
+</head>
+<body>
+<canvas id="myCanvas" width="1368px" height="768px" style="border: 1px solid red"></canvas>
+<script>
+    function Circle(x, y, radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+    function getRandomHex() {
+        return Math.floor(Math.random()*255);
+    }
+    function getRandomColor() {
+        var red = getRandomHex();
+        var green = getRandomHex();
+        var blue = getRandomHex();
+        return "rgb(" + red + "," + blue + "," + green +")";
+    }
+    function createCircle() {
+        var ctx = document.getElementById("myCanvas").getContext("2d");
+        var radius = Math.floor(Math.random() * 80);//Hàm Math.random tính ngẫu nhiên
+        var color = getRandomColor();
+        var x = Math.random() * window.innerWidth;//innerWidth là thuộc tính trả về kích thước chiều rộng
+        var y = Math.random() * window.innerHeight;//innerHeight là thuộc tính trả về kích thước chiều dài
+        var circle = new Circle(x, y, radius);
+        //var circle = new Circle(500, 500, 80);
+        ctx.beginPath();//phương thức BeginPath() bắt đầu một đường dẫn hoặc đặt tại đường dẫn hiện tại
+        ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+        //phương thức arc() tạo ra một cung / đường cong
+        ctx.fillStyle = color;//thuộc tính fillStyle đặt hoặc trả về màu, độ dốc hoặc mẫu được sử dụng để điền vào bản vẽ
+        ctx.fill();//phương thức fill() điền vào bản vẽ hiện tại(đường dẫn). Màu mặc đình là màu đen
+    }
+    function createMultipleCirle() {
+        for (var i = 0; i < 30; i++){
+            createCircle();
+        }
+    }
+    createMultipleCirle();
+</script>
+</body>
+</html>
